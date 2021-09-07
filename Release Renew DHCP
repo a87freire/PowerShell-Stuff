@@ -1,0 +1,5 @@
+$adapter = Get-WmiObject Win32_networkadapterConfiguration -ComputerName LON-SVR1
+$description = "netvsc"
+Where-Object { $_.Description –match $description}
+$adapter.ReleaseDHCPLease()
+$adapter.RenewDHCPLease()
