@@ -1,0 +1,11 @@
+#This gives you servers
+Get-ADComputer -Filter 'operatingsystem -like "*server*" -and enabled -eq "true"' `
+-Properties Name,Operatingsystem,OperatingSystemVersion,IPv4Address |
+Sort-Object -Property Operatingsystem |
+Select-Object -Property Name,Operatingsystem,OperatingSystemVersion,IPv4Address
+
+#This gives you PCs
+Get-ADComputer -Filter 'operatingsystem -notlike "*server*" -and enabled -eq "true"' `
+-Properties Name,Operatingsystem,OperatingSystemVersion,IPv4Address |
+Sort-Object -Property Operatingsystem |
+Select-Object -Property Name,Operatingsystem,OperatingSystemVersion,IPv4Address
