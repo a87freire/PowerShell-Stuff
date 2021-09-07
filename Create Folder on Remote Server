@@ -1,0 +1,18 @@
+#Almost working
+
+$computername = 'LON-SVR1'
+$shareName = 'New Test'
+$fullAccess = 'adatum\Administrator'
+
+$session = New-CimSession -ComputerName $computername
+
+Invoke-Command -ComputerName LON-SVR1 { 
+    $setupFolder = "c:\New_Test"
+    Write-Host "Creating Test Folder"
+    New-Item -Path $setupFolder -type directory -Force 
+    Write-Host "Folder creation complete"
+    }
+   
+New-Item -Path \\$computername\D$ -Name "New_Test" -ItemType Directory
+New-SMBShare -Name $shareName -Path c:\Test -FullAccess $fullAccess -CimSession $session
+Remove-CimSession -CimSession $session
