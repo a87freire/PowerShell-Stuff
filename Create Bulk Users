@@ -1,5 +1,5 @@
-#Make sure to change directory (cd) to the file location and change users.csv to the file name#
-#Also change the DC and upn#
+#Make sure to change directory (cd) to the file location and change users.csv to the file name
+#Also change the DC and upn
 
 $users = Import-CSV users.csv
 
