@@ -1,0 +1,6 @@
+#change DC=to the domain and ,DC=Top Level Domain"#
+$moveToOU = "CN=OU Name,DC=domain,DC=com"
+
+Get-ADUser -filter {Enabled -eq $false } | Foreach-object {
+  Move-ADObject -Identity $_.DistinguishedName -TargetPath $moveToOU -WhatIf
+  }
