@@ -1,8 +1,8 @@
-#This will find all locked accounts#
+#This will find all locked accounts
 Search-ADAccount -lockedout | Select-Object Name, SamAccountName
 
-#This will unlock all locked accounts#
+#This will unlock all locked accounts
 Search-ADAccount -Lockedout | Unlock-AdAccount
 
-#This will unlock an individual account#
+#This will unlock an individual account
 Unlock-ADAccount -Identity 'username'
