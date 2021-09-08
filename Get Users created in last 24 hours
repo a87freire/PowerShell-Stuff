@@ -1,0 +1,13 @@
+$When = ((Get-Date).AddDays(-1)) 
+$UserList = Get-ADUser -filter { (whencreated -ge $When) } -Properties Department
+foreach ($User in $UserList) {
+    $GroupList = Get-ADPrincipalGroupMembership $User
+    foreach ($Group in $GroupList) {
+        [PSCustomObject]@{
+           User = $User.sAMAccountName
+           Departement = $User.Department
+           Group       = $Group.Name
+           Category    = $Group.Category
+     }
+  }
+}
