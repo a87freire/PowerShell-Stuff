@@ -1,0 +1,9 @@
+#Run this command first to find the searchbase
+
+Get-ADGroupMember -Identity 'Administrators' -Recursive
+
+#Run this after to get all Admin accounts created in the past 7 days
+
+$When = ((Get-Date).AddDays(-7)).Date
+Get-ADUSer -Filter {whenCreated -ge $When} -SearchBase "CN=Administrator,CN=Users,DC=Adatum,DC=com" -Properties whenCreated | Select-Object name, objectClass,distinguishedName | Export-Csv -Path C:\Admin_accounts_created.csv
+
