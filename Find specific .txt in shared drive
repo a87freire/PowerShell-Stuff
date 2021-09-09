@@ -1,0 +1,16 @@
+$searchWords = @('test')
+
+Foreach ($sw in $searchWords)
+{
+    Get-Childitem -Path "\\Lon-DC1\Test_Share" -Recurse -include "*.txt","*.xlsx*","*.docx*","*.ps1*" | 
+    Select-String -Pattern "$sw" | 
+    Select Path,LineNumber,@{n='test';e={$sw}}
+
+$excel = New-Object -Com Excel.Application
+gci -include *.xls, *.xlsx | foreach-object {
+    $wb = $excel.Workbooks.Open("$_")
+    $sheet = $wb.Sheets.Item(1) 
+#note here, if you use multiple sheets per wrkbook, you'll need to loop through these as well. 
+    $sheet.Cells.Find('test').count
+    }
+}
